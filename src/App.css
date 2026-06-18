@@ -1,0 +1,27 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.calculator {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  max-width: 500px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .calculator {
+    max-width: 100%;
+  }
+}

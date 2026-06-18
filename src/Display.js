@@ -1,10 +1,14 @@
-import './Display.css'
-import React,{SetState} from 'react'
-function Display(props){
-    let displayOutput = 0
-    return (
-        <p className='component-display'>{displayOutput}</p>
-    )
-}
+import React from 'react';
+import './Display.css';
 
-export default Display
+export default function Display({ value, angleMode, hasMemory }) {
+  return (
+    <div className="display-container">
+      <div className="display-info">
+        <span className="angle-mode">{angleMode.toUpperCase()}</span>
+        {hasMemory && <span className="memory-indicator">M</span>}
+      </div>
+      <div className="display-value">{value}</div>
+    </div>
+  );
+}
