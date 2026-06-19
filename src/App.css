@@ -1,0 +1,42 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.calculator {
+  background-color: #000;
+  border-radius: 10px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  max-width: 500px;
+  width: 100%;
+}
+
+.calculator-info {
+  background-color: #1c1c1c;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #ff9500;
+  font-weight: 600;
+}
+
+.angle-mode {
+  background-color: #333;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.memory-indicator {
+  background-color: #ff9500;
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 700;
+}
