@@ -1,0 +1,71 @@
+.programmer-display {
+  background: #1e1e1e;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+}
+
+.base-displays {
+  margin-bottom: 15px;
+  font-family: 'Courier New', monospace;
+}
+
+.base-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  background: #2d2d2d;
+  border-radius: 4px;
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+
+.base-row.active {
+  opacity: 1;
+  background: #3d3d3d;
+  border-left: 3px solid #0078d4;
+}
+
+.base-label {
+  color: #888;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 40px;
+}
+
+.base-value {
+  font-size: 14px;
+  text-align: right;
+  flex: 1;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.main-display {
+  font-size: 48px;
+  text-align: right;
+  padding: 15px;
+  background: #000;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.main-display::-webkit-scrollbar {
+  height: 6px;
+}
+
+.main-display::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.main-display::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
