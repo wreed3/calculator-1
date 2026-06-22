@@ -1,0 +1,101 @@
+.programmer-button-panel {
+  background: #2d2d2d;
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.prog-button {
+  flex: 1;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #3d3d3d;
+  color: #ffffff;
+  transition: all 0.2s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.prog-button:hover:not(.disabled) {
+  background: #4d4d4d;
+  transform: translateY(-1px);
+}
+
+.prog-button:active:not(.disabled) {
+  transform: translateY(0);
+  background: #2d2d2d;
+}
+
+.prog-button.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: #2d2d2d;
+}
+
+.prog-button.base-button {
+  background: #1e1e1e;
+  color: #888;
+  font-size: 14px;
+  padding: 12px;
+}
+
+.prog-button.base-button.active {
+  background: #0078d4;
+  color: #ffffff;
+}
+
+.prog-button.operation {
+  background: #0078d4;
+  color: #ffffff;
+}
+
+.prog-button.operation:hover:not(.disabled) {
+  background: #1084d8;
+}
+
+.prog-button.function {
+  background: #d13438;
+  color: #ffffff;
+}
+
+.prog-button.function:hover {
+  background: #e14448;
+}
+
+.prog-button.equals {
+  background: #107c10;
+  color: #ffffff;
+  flex: 2;
+}
+
+.prog-button.equals:hover {
+  background: #128c12;
+}
+
+.prog-button.wide {
+  flex: 2;
+}
+
+.prog-button.small-text {
+  font-size: 13px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .prog-button {
+    padding: 14px;
+    font-size: 14px;
+  }
+  
+  .prog-button.small-text {
+    font-size: 11px;
+  }
+}

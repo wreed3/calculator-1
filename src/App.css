@@ -1,42 +1,72 @@
 .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
 }
 
-.calculator {
-  background-color: #000;
-  border-radius: 10px;
-  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+.calculator-container {
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   max-width: 500px;
   width: 100%;
 }
 
-.calculator-info {
-  background-color: #1c1c1c;
-  padding: 8px 20px;
+.mode-switcher {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 0;
+  padding: 15px 20px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.mode-button {
+  flex: 1;
+  padding: 12px 20px;
+  background: #2d2d2d;
+  color: #888;
+  border: none;
+  cursor: pointer;
   font-size: 14px;
-  color: #ff9500;
   font-weight: 600;
+  transition: all 0.3s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.angle-mode {
-  background-color: #333;
-  padding: 4px 12px;
-  border-radius: 4px;
+.mode-button:first-child {
+  border-radius: 6px 0 0 6px;
 }
 
-.memory-indicator {
-  background-color: #ff9500;
-  color: #000;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-weight: 700;
+.mode-button:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.mode-button:hover {
+  background: #3d3d3d;
+  color: #fff;
+}
+
+.mode-button.active {
+  background: #0078d4;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .calculator-container {
+    max-width: 100%;
+  }
+  
+  .mode-button {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
 }
