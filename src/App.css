@@ -26,15 +26,16 @@
 
 .mode-button {
   flex: 1;
-  padding: 12px 20px;
+  padding: 12px 15px;
   background: #2d2d2d;
   color: #888;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   transition: all 0.3s;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  white-space: nowrap;
 }
 
 .mode-button:first-child {
@@ -43,6 +44,10 @@
 
 .mode-button:last-child {
   border-radius: 0 6px 6px 0;
+}
+
+.mode-button:not(:first-child):not(:last-child) {
+  border-radius: 0;
 }
 
 .mode-button:hover {
@@ -66,7 +71,14 @@
   }
   
   .mode-button {
-    padding: 10px 15px;
-    font-size: 13px;
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 400px) {
+  .mode-button {
+    padding: 8px 5px;
+    font-size: 10px;
   }
 }
