@@ -1,84 +1,48 @@
 .App {
+  text-align: center;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
 }
 
-.calculator-container {
-  background: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  max-width: 500px;
-  width: 100%;
-}
-
-.mode-switcher {
+.calculator-selector {
   display: flex;
-  gap: 0;
-  padding: 15px 20px;
-  background: #1a1a1a;
-  border-bottom: 1px solid #333;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
-.mode-button {
-  flex: 1;
-  padding: 12px 15px;
-  background: #2d2d2d;
-  color: #888;
-  border: none;
+.calculator-selector button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  transition: all 0.3s;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  white-space: nowrap;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-.mode-button:first-child {
-  border-radius: 6px 0 0 6px;
+.calculator-selector button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
-.mode-button:last-child {
-  border-radius: 0 6px 6px 0;
+.calculator-selector button.active {
+  background: white;
+  color: #667eea;
+  font-weight: bold;
 }
 
-.mode-button:not(:first-child):not(:last-child) {
-  border-radius: 0;
-}
-
-.mode-button:hover {
-  background: #3d3d3d;
-  color: #fff;
-}
-
-.mode-button.active {
-  background: #0078d4;
-  color: #ffffff;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .App {
-    padding: 10px;
+@media (max-width: 768px) {
+  .calculator-selector {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  .calculator-container {
-    max-width: 100%;
-  }
-  
-  .mode-button {
-    padding: 10px 8px;
-    font-size: 11px;
-  }
-}
 
-@media (max-width: 400px) {
-  .mode-button {
-    padding: 8px 5px;
-    font-size: 10px;
+  .calculator-selector button {
+    width: 100%;
   }
 }
