@@ -15,8 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "browserslist@latest --update-db || true"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -26,14 +25,14 @@
   },
   "browserslist": {
     "production": [
-      "defaults",
-      "not IE 11"
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
     "development": [
-      "last 2 chrome versions",
-      "last 2 firefox versions",
-      "last 2 safari versions",
-      "last 2 edge versions"
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   }
 }
