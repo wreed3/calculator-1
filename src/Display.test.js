@@ -33,9 +33,8 @@ describe('Display Component', () => {
   });
 
   test('applies correct CSS class', () => {
-    render(<Display value="100" />);
-    const display = screen.getByTestId('display');
-    expect(display).toHaveClass('display');
+    const { container } = render(<Display value="100" />);
+    expect(container.firstChild).toHaveClass('display');
   });
 
   test('handles string number values', () => {
@@ -46,5 +45,21 @@ describe('Display Component', () => {
   test('handles numeric values', () => {
     render(<Display value={789} />);
     expect(screen.getByTestId('display')).toHaveTextContent('789');
+  });
+
+  test('handles empty string', () => {
+    render(<Display value="" />);
+    const display = screen.getByTestId('display');
+    expect(display).toBeInTheDocument();
+  });
+
+  test('handles very long numbers', () => {
+    render(<Display value="12345678901234567890" />);
+    expect(screen.getByTestId('display')).toBeInTheDocument();
+  });
+
+  test('handles scientific notation', () => {
+    render(<Display value="1.23e+10" />);
+    expect(screen.getByTestId('display')).toHaveTextContent('1.23e+10');
   });
 });
