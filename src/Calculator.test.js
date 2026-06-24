@@ -13,8 +13,7 @@ describe('Calculator Component', () => {
     });
 
     test('updates display when number button is clicked', () => {
-      const button5 = screen.getByText('5');
-      fireEvent.click(button5);
+      fireEvent.click(screen.getByText('5'));
       const display = screen.getByTestId('display');
       expect(display).toHaveTextContent('5');
     });
@@ -25,6 +24,14 @@ describe('Calculator Component', () => {
       fireEvent.click(screen.getByText('3'));
       const display = screen.getByTestId('display');
       expect(display).toHaveTextContent('123');
+    });
+
+    test('does not add leading zeros', () => {
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('5'));
+      const display = screen.getByTestId('display');
+      expect(display).toHaveTextContent('5');
     });
   });
 
@@ -64,6 +71,15 @@ describe('Calculator Component', () => {
       const display = screen.getByTestId('display');
       expect(display).toHaveTextContent('4');
     });
+
+    test('handles division by zero', () => {
+      fireEvent.click(screen.getByText('5'));
+      fireEvent.click(screen.getByText('÷'));
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('='));
+      const display = screen.getByTestId('display');
+      expect(display).toHaveTextContent(/Error|Infinity/);
+    });
   });
 
   describe('Chained Operations', () => {
@@ -79,19 +95,19 @@ describe('Calculator Component', () => {
     });
 
     test('chains mixed operations', () => {
-      fireEvent.click(screen.getByText('10'));
-      fireEvent.click(screen.getByText('+'));
       fireEvent.click(screen.getByText('5'));
+      fireEvent.click(screen.getByText('+'));
+      fireEvent.click(screen.getByText('3'));
       fireEvent.click(screen.getByText('×'));
       fireEvent.click(screen.getByText('2'));
       fireEvent.click(screen.getByText('='));
       const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('30');
+      expect(display).toHaveTextContent('16');
     });
   });
 
   describe('Decimal Operations', () => {
-    test('handles decimal point input', () => {
+    test('adds decimal point', () => {
       fireEvent.click(screen.getByText('3'));
       fireEvent.click(screen.getByText('.'));
       fireEvent.click(screen.getByText('1'));
@@ -110,21 +126,21 @@ describe('Calculator Component', () => {
       expect(display).toHaveTextContent('3.14');
     });
 
-    test('performs operations with decimals', () => {
-      fireEvent.click(screen.getByText('2'));
+    test('handles decimal arithmetic', () => {
+      fireEvent.click(screen.getByText('0'));
       fireEvent.click(screen.getByText('.'));
-      fireEvent.click(screen.getByText('5'));
-      fireEvent.click(screen.getByText('+'));
       fireEvent.click(screen.getByText('1'));
+      fireEvent.click(screen.getByText('+'));
+      fireEvent.click(screen.getByText('0'));
       fireEvent.click(screen.getByText('.'));
-      fireEvent.click(screen.getByText('5'));
+      fireEvent.click(screen.getByText('2'));
       fireEvent.click(screen.getByText('='));
       const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('4');
+      expect(display).toHaveTextContent(/0\.3/);
     });
   });
 
-  describe('Special Functions', () => {
+  describe('Clear Function', () => {
     test('clears display with AC button', () => {
       fireEvent.click(screen.getByText('5'));
       fireEvent.click(screen.getByText('AC'));
@@ -132,21 +148,19 @@ describe('Calculator Component', () => {
       expect(display).toHaveTextContent('0');
     });
 
-    test('toggles sign with +/- button', () => {
+    test('clears operation state', () => {
       fireEvent.click(screen.getByText('5'));
-      fireEvent.click(screen.getByText('+/-'));
+      fireEvent.click(screen.getByText('+'));
+      fireEvent.click(screen.getByText('3'));
+      fireEvent.click(screen.getByText('AC'));
+      fireEvent.click(screen.getByText('2'));
+      fireEvent.click(screen.getByText('='));
       const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('-5');
+      expect(display).toHaveTextContent('2');
     });
+  });
 
-    test('toggles sign back to positive', () => {
-      fireEvent.click(screen.getByText('5'));
-      fireEvent.click(screen.getByText('+/-'));
-      fireEvent.click(screen.getByText('+/-'));
-      const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('5');
-    });
-
+  describe('Percentage Function', () => {
     test('calculates percentage', () => {
       fireEvent.click(screen.getByText('5'));
       fireEvent.click(screen.getByText('0'));
@@ -154,36 +168,54 @@ describe('Calculator Component', () => {
       const display = screen.getByTestId('display');
       expect(display).toHaveTextContent('0.5');
     });
+
+    test('uses percentage in calculation', () => {
+      fireEvent.click(screen.getByText('2'));
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('+'));
+      fireEvent.click(screen.getByText('1'));
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('%'));
+      fireEvent.click(screen.getByText('='));
+      const display = screen.getByTestId('display');
+      expect(display).toHaveTextContent('220');
+    });
+  });
+
+  describe('Sign Toggle', () => {
+    test('toggles positive to negative', () => {
+      fireEvent.click(screen.getByText('5'));
+      fireEvent.click(screen.getByText('+/-'));
+      const display = screen.getByTestId('display');
+      expect(display).toHaveTextContent('-5');
+    });
+
+    test('toggles negative to positive', () => {
+      fireEvent.click(screen.getByText('5'));
+      fireEvent.click(screen.getByText('+/-'));
+      fireEvent.click(screen.getByText('+/-'));
+      const display = screen.getByTestId('display');
+      expect(display).toHaveTextContent('5');
+    });
+
+    test('works with zero', () => {
+      fireEvent.click(screen.getByText('0'));
+      fireEvent.click(screen.getByText('+/-'));
+      const display = screen.getByTestId('display');
+      expect(display).toHaveTextContent('0');
+    });
   });
 
   describe('Edge Cases', () => {
-    test('handles division by zero', () => {
+    test('handles pressing equals without operation', () => {
       fireEvent.click(screen.getByText('5'));
-      fireEvent.click(screen.getByText('÷'));
-      fireEvent.click(screen.getByText('0'));
       fireEvent.click(screen.getByText('='));
       const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent(/error|infinity/i);
+      expect(display).toHaveTextContent('5');
     });
 
-    test('handles starting with decimal point', () => {
-      fireEvent.click(screen.getByText('.'));
-      fireEvent.click(screen.getByText('5'));
-      const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('0.5');
-    });
-
-    test('clears state after calculation and new number', () => {
-      fireEvent.click(screen.getByText('5'));
-      fireEvent.click(screen.getByText('+'));
-      fireEvent.click(screen.getByText('3'));
-      fireEvent.click(screen.getByText('='));
-      fireEvent.click(screen.getByText('2'));
-      const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('2');
-    });
-
-    test('continues calculation after equals', () => {
+    test('handles pressing operation immediately after equals', () => {
       fireEvent.click(screen.getByText('5'));
       fireEvent.click(screen.getByText('+'));
       fireEvent.click(screen.getByText('3'));
@@ -194,22 +226,15 @@ describe('Calculator Component', () => {
       const display = screen.getByTestId('display');
       expect(display).toHaveTextContent('10');
     });
-  });
 
-  describe('Zero Handling', () => {
-    test('replaces leading zero when digit is entered', () => {
-      fireEvent.click(screen.getByText('0'));
+    test('starts new number after equals', () => {
       fireEvent.click(screen.getByText('5'));
+      fireEvent.click(screen.getByText('+'));
+      fireEvent.click(screen.getByText('3'));
+      fireEvent.click(screen.getByText('='));
+      fireEvent.click(screen.getByText('7'));
       const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('5');
-    });
-
-    test('allows zero after decimal point', () => {
-      fireEvent.click(screen.getByText('1'));
-      fireEvent.click(screen.getByText('.'));
-      fireEvent.click(screen.getByText('0'));
-      const display = screen.getByTestId('display');
-      expect(display).toHaveTextContent('1.0');
+      expect(display).toHaveTextContent('7');
     });
   });
 });

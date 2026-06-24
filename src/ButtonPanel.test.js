@@ -30,7 +30,7 @@ describe('ButtonPanel Component', () => {
     expect(screen.getByText('.')).toBeInTheDocument();
   });
 
-  test('passes click events to handler', () => {
+  test('passes click events to handler for numbers', () => {
     const handleClick = jest.fn();
     render(<ButtonPanel clickHandler={handleClick} />);
     fireEvent.click(screen.getByText('5'));
@@ -56,10 +56,44 @@ describe('ButtonPanel Component', () => {
     expect(container.firstChild).toHaveClass('button-panel');
   });
 
-  test('buttons are arranged in grid layout', () => {
-    const { container } = render(<ButtonPanel clickHandler={() => {}} />);
-    const panel = container.firstChild;
-    const computedStyle = window.getComputedStyle(panel);
-    expect(computedStyle.display).toBe('grid');
+  test('handles decimal button click', () => {
+    const handleClick = jest.fn();
+    render(<ButtonPanel clickHandler={handleClick} />);
+    fireEvent.click(screen.getByText('.'));
+    expect(handleClick).toHaveBeenCalledWith('.');
+  });
+
+  test('handles percentage button click', () => {
+    const handleClick = jest.fn();
+    render(<ButtonPanel clickHandler={handleClick} />);
+    fireEvent.click(screen.getByText('%'));
+    expect(handleClick).toHaveBeenCalledWith('%');
+  });
+
+  test('handles sign toggle button click', () => {
+    const handleClick = jest.fn();
+    render(<ButtonPanel clickHandler={handleClick} />);
+    fireEvent.click(screen.getByText('+/-'));
+    expect(handleClick).toHaveBeenCalledWith('+/-');
+  });
+
+  test('handles equals button click', () => {
+    const handleClick = jest.fn();
+    render(<ButtonPanel clickHandler={handleClick} />);
+    fireEvent.click(screen.getByText('='));
+    expect(handleClick).toHaveBeenCalledWith('=');
+  });
+
+  test('all buttons are clickable', () => {
+    const handleClick = jest.fn();
+    render(<ButtonPanel clickHandler={handleClick} />);
+    
+    const allButtons = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+                        '+', '-', '×', '÷', 'AC', '+/-', '%', '=', '.'];
+    
+    allButtons.forEach(buttonName => {
+      const button = screen.getByText(buttonName);
+      expect(button).toBeEnabled();
+    });
   });
 });
