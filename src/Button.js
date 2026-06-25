@@ -1,15 +1,17 @@
-import './Button.css'
-function Button(props){
-    const value = (event) =>{
-        console.log(props.value)
-    }
+import React from 'react';
+import './Button.css';
 
-    const isOperator = val => {
-        return !isNaN(val) || val === "." || val === "=";
-    }
-    return(
-        <button className='component-button button' onClick={value}>{props.value}</button>
-    )
+function Button({ name, clickHandler, className = '', wide = false }) {
+  const buttonClass = `Button ${className} ${wide ? 'wide' : ''}`.trim();
+  
+  return (
+    <button 
+      className={buttonClass}
+      onClick={() => clickHandler(name)}
+    >
+      {name}
+    </button>
+  );
 }
 
-export default Button
+export default Button;
