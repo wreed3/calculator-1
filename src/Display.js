@@ -1,10 +1,12 @@
-import './Display.css'
-import React,{SetState} from 'react'
-function Display(props){
-    let displayOutput = 0
-    return (
-        <p className='component-display'>{displayOutput}</p>
-    )
+import React from 'react';
+import './Display.css';
+
+function Display({ value }) {
+  return (
+    <div className="Display">
+      {value}
+    </div>
+  );
 }
 
-export default Display
+export default Display;
